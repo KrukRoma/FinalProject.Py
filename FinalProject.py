@@ -228,9 +228,9 @@ def validate_input(event):
         current_text = entry.get()
         entry.delete(0, END)
         entry.insert(END, current_text + char)
-    elif char == '\r':  # Обробка натискання клавіші Enter як натискання "="
+    elif char == '\r':  
         calculate()
-    return 'break'  # Забороняємо введення символів через обробник подій
+    return 'break'  
 
 
 
@@ -280,12 +280,12 @@ def calculate():
     current_text = entry.get()
     if current_text and current_text[-1] in ['+', '-', '*', '/']:
         entry.delete(len(current_text) - 1, END)
-    expression = entry.get().replace(' ', '')  # Видаляємо пробіли
-    parts = re.split(r'(\+|\-|\*|\/)', expression)  # Розбиваємо вираз на числа та оператори
+    expression = entry.get().replace(' ', '')  
+    parts = re.split(r'(\+|\-|\*|\/)', expression)  
     for i, part in enumerate(parts):
         if part.startswith('0') and len(part) > 1 and not part.startswith('0.'):
-            parts[i] = part[1:]  # Видаляємо нуль на початку числа, якщо число не є просто '0' або починається з '0.'
-    expression = ''.join(parts)  # Збираємо вираз знову
+            parts[i] = part[1:]  
+    expression = ''.join(parts)  
     try:
         result = eval(expression)
         entry.delete(0, END)
